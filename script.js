@@ -1,41 +1,61 @@
-'use strict';
+"use strict";
 
-const btn = document.querySelector('.btn-country');
-const countriesContainer = document.querySelector('.countries');
+const btn = document.querySelector(".btn-country");
+const countriesContainer = document.querySelector(".countries");
 
-///////////////////////////////////////
-function countrySinfo(countryname){
+const renderCountry = function (data3) {
+  //console.log(data3.languages);
+  const language = data3.languages ? data3.languages[0].name : "Unknown";
+  const htmll = `
+  <article class="country">
+    <img class="country__img" src="${data3.flag}" />
+    <div class="country__data">
+      <h3 class="country__name">${data3.name}</h3>
+      <h4 class="country__region">${data3.region}</h4>
+      <p class="country__row"><span>👫</span>${+(
+        data3.population / 1000000
+      ).toFixed(1)}</p>
+      <p class="country__row"><span>🗣️</span>${language}</p>
+      <p class="country__row"><span>💰</span>${data3.currencies[0].name}</p>
+    </div>
+  </article>
 
+  `;
 
-const request = new XMLHttpRequest();
-console.log(countryname);
-request.open('GET',`https://restcountries.com/v2/name/${countryname}`);;
-const country = request.send();
+  countriesContainer.insertAdjacentHTML("beforeend", htmll);
 
-request.addEventListener('load',function(){
+  countriesContainer.style.opacity = 1;
+};
 
+function countrySinfo(countryname) {
+  const request = new XMLHttpRequest();
+
+  request.open("GET", `https://restcountries.com/v2/name/${countryname}`);
+  const country = request.send();
+
+  request.addEventListener("load", function () {
     const [data] = JSON.parse(this.responseText);
     console.log(data);
-    const htmll=`
-    <article class="country">
-      <img class="country__img" src="${data.flag}" />
-      <div class="country__data">
-        <h3 class="country__name">${data.name}</h3>
-        <h4 class="country__region">${data.region}</h4>
-        <p class="country__row"><span>👫</span>${+(data.population / 1000000).toFixed(1)}</p>
-        <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
-        <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
-      </div>
-    </article>
 
-    `
+    renderCountry(data);
 
-    countriesContainer.insertAdjacentHTML('beforeend',htmll);
+    const [neighbor] = data.borders;
+  console.log(neighbor);
+    if (!data.borders) return;
 
-    countriesContainer.style.opacity = 1;
-});
+    const request2 = new XMLHttpRequest();
+    request2.open("GET", `https://restcountries.com/v3.1/alpha/${neighbor}`);
+     request2.send();
 
-};
-countrySinfo('Pakistan');
+      request2.addEventListener('load',function(){
+
+        const [data2] = JSON.parse(this.responseText);
+        console.log(data2);
+        renderCountry(data2);
 
 
+
+      })
+  });
+}
+countrySinfo("Pakistan");
