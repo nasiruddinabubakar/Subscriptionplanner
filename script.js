@@ -58,6 +58,8 @@ function countrySinfo(countryname,logo) {
 countrySinfo("Pakistan","Netflix.com");
 countrySinfo("Pakistan","PrimeVideo.com");
 countrySinfo('us',"HBO.com");
+countrySinfo('us',"Marvel.com");
+countrySinfo('us',"icc.com");
 
 var cardType; // Declare the cardType variable before using it
 
