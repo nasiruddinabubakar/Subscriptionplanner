@@ -4,11 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <link rel="stylesheet" href="style.css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script defer src="script.js"></script>
     <title>Asynchronous JavaScript</title>
   </head>
+  
   <body>
+    <header>
+
+      <button class="btnn">Add Subscription  &rarr;</button>
+      <button class="notification">🔔</button>
+  
+    
+    </header>
     <main class="container">
       <div class="countries">
         <!--
@@ -24,8 +34,30 @@
         </article>
         -->
       </div>
-      <!-- <button class="btn-country">Where am I?</button> -->
+      <!-- <input type="text" id="input-cc"> -->
+     
       <div class="images"></div>
     </main>
+    <div class="modal hidden">
+      <button class="btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+               Subscriptions Made Easy! <br />
+           
+      </h2>
+      <form class="modal__form">
+        <label>Subscription</label>
+        <input type="website" id="service"/>
+        <label>Starting Date</label>
+        <input type="date" id="startdate" />
+        <label>Next Payment</label>
+        <input type="date" id="enddate"/>
+        <label>Card Number</label>
+        <input type="text" id="input-cc"/>
+    
+      </form>
+      <button  id = "butt" class="btnn">Done</button>
+    </div>
+    <div class="overlay hidden"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.5.8/cleave.min.js"></script>
   </body>
 </html>

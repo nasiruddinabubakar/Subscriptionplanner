@@ -2,23 +2,61 @@
 
 const btn = document.querySelector(".btn-country");
 const countriesContainer = document.querySelector(".countries");
+const close_subscription_button = document.querySelector(".btn--close-modal");
+const modal = document.querySelector(".modal");
+const modal_show = document.querySelector(".btnn");
+const bodd = document.querySelector("body");
+const window_to_blur = document.querySelector(".container");
+const overlay = document.querySelector(".overlay");
+const startdateInput = document.getElementById("startdate");
+const servicenameInput =  document.getElementById('service');
+const cardnumb = document.getElementById('input-cc');
+const enddateInput = document.getElementById("enddate");
+const submitButton = document.getElementById("butt");
 
-const renderCountry = function (data3, classname = "neighbour",brand_api) {
-  classname = "neighbour";
-    const logo = 'https://logo.clearbit.com/'+brand_api;
-    const name = brand_api.slice(0,-4);
-   
-   
+
+
+
+class SubscriptionInfo  {
   
+  constructor(start,next,Cardnum,type,name){
+
+    this.start = start;
+    this.next = next;
+    this.type = type;
+    this.Cardnum =  Cardnum;
+    this.name = name;
+
+
+  }
+  
+};
+submitButton.addEventListener("click", function() {
+
+  const newsubscription = new SubscriptionInfo( startdateInput.value,enddateInput.value,cardnumb.value,cardType,servicenameInput.value);
+ 
+  renderCountry(newsubscription);
+
+  // Perform further operations with the start date value
+});
+
+
+
+
+const renderCountry = function (output) {
+  const classname = "neighbour";
+  const brand_api = output.name;
+  const logo = "https://logo.clearbit.com/" + brand_api;
+  const name = brand_api.slice(0, -4);
   const htmll = `
   <article class=  "${"country"} ${classname}" >
     <img class="country__img" src=${logo} />
     <div class="country__data">
       <h3 class="country__name">${name}</h3>
-      <h4 class="country__region">${data3.region}</h4>
-      <p class="country__row"><span>💳</span>${"VISA"}</p>
-      <p class="country__row"><span>🤝</span>${"3/2/18"}</p>
-      <p class="country__row"><span>💵</span>${"3/8/23"}</p>
+      <h4 class="country__region"></h4>
+      <p class="country__row"><span>💳</span>${output.type}</p>
+      <p class="country__row"><span>🤝</span>${output.start}</p>
+      <p class="country__row"><span>💵</span>${output.next}</p>
     </div>
   </article>
 
@@ -29,64 +67,63 @@ const renderCountry = function (data3, classname = "neighbour",brand_api) {
 
   countriesContainer.style.opacity = 1;
   const popup = document.querySelector(".country");
-  const rendered_divs = document.querySelectorAll('.country');
+  const rendered_divs = document.querySelectorAll(".country");
   // console.log(rendered_divs);
-  rendered_divs.forEach((divs)=>
-  
-  divs.addEventListener("mouseover", function () {
-    divs.classList.remove("neighbour");
+  rendered_divs.forEach((divs) =>
+    divs.addEventListener("mouseover", function () {
+      divs.classList.remove("neighbour");
 
-    // console.log("hovering");
-    // console.log(data3.classlist);
-  }));
-  rendered_divs.forEach((divs)=>
-  
-  divs.addEventListener("mouseout", function (e) {
-    divs.classList.add("neighbour");
+      // console.log("hovering");
+      // console.log(data3.classlist);
+    })
+  );
+  rendered_divs.forEach((divs) =>
+    divs.addEventListener("mouseout", function (e) {
+      divs.classList.add("neighbour");
 
-    console.log("hovering "+e);
-    // console.log(data3.classlist);
-  }));
+    })
+  );
 };
 
-function countrySinfo(countryname,logo) {
-  fetch(`https://restcountries.com/v2/name/${countryname}`)
-    .then((response) => response.json())
-    .then((data) => {
-      renderCountry(data[0],0,logo);
-    });
+
+
+const CloseSubscription = function () {
+  modal.classList.add("hidden");
+  window_to_blur.classList.remove("blur");
+  overlay.classList.add("hidden");
+  overlay.classList.remove("blur");
+};
+const AddSubscription = function () {
+  overlay.classList.remove("hidden");
+  modal.classList.remove("hidden");
+  window_to_blur.classList.add("blur");
+  
+};
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+    CloseSubscription();
+  }
+});
+
+modal_show.addEventListener("click", AddSubscription);
+close_subscription_button.addEventListener("click", CloseSubscription);
+overlay.addEventListener("click", CloseSubscription);
+submitButton.addEventListener('click',CloseSubscription);
+
+
+var cardType; // Declare the cardType variable before using it
+
+var cleave = new Cleave("#input-cc", {
+  creditCard: true,
+  delimiter: "-",
+  onCreditCardTypeChanged: function (type) {
+    cardType = type;
+  },
+});
+
+const TakeSubscriptionInfo = function(){
+  
+  // SubscriptionInfo.start= document.querySelector('startdate').value;
+
+
 }
-
-countrySinfo("Pakistan","Netflix.com");
-countrySinfo("Pakistan","PrimeVideo.com");
-countrySinfo('us',"HBO.com");
-
-//countrySinfo("usa");
-//countrySinfo("Russia");
-// const request = new XMLHttpRequest();
-
-// request.open("GET", `https://restcountries.com/v2/name/${countryname}`);
-// const country = request.send();
-
-// request.addEventListener("load", function () {
-//   const [data] = JSON.parse(this.responseText);
-//   console.log(data);
-
-//   renderCountry(data);
-
-//   const [neighbor] = data.borders;
-// console.log(neighbor);
-//   if (!data.borders) return;
-
-//   const request2 = new XMLHttpRequest();
-//   request2.open("GET", `https://restcountries.com/v2/name/${neighbor}`);
-//    request2.send();
-
-//     request2.addEventListener('load',function(){
-
-//       const [data2] = JSON.parse(this.responseText);
-//       console.log(data2);
-//       renderCountry(data2,"neighbour");
-
-//     })
-// });
