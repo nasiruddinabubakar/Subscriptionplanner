@@ -9,39 +9,36 @@ const bodd = document.querySelector("body");
 const window_to_blur = document.querySelector(".container");
 const overlay = document.querySelector(".overlay");
 const startdateInput = document.getElementById("startdate");
-const servicenameInput =  document.getElementById('service');
-const cardnumb = document.getElementById('input-cc');
+const servicenameInput = document.getElementById("service");
+const cardnumb = document.getElementById("input-cc");
 const enddateInput = document.getElementById("enddate");
 const submitButton = document.getElementById("butt");
 
-
-
-
-class SubscriptionInfo  {
-  
-  constructor(start,next,Cardnum,type,name){
-
+class SubscriptionInfo {
+  constructor(start, next, Cardnum, type, name) {
     this.start = start;
     this.next = next;
     this.type = type;
-    this.Cardnum =  Cardnum;
+    this.Cardnum = Cardnum;
     this.name = name;
-
-
   }
-  
-};
-submitButton.addEventListener("click", function() {
+}
+submitButton.addEventListener("click", function () {
+  const newsubscription = new SubscriptionInfo(
+    startdateInput.value,
+    enddateInput.value,
+    cardnumb.value,
+    cardType,
+    servicenameInput.value
+  );
 
-  const newsubscription = new SubscriptionInfo( startdateInput.value,enddateInput.value,cardnumb.value,cardType,servicenameInput.value);
- 
+  const datecheck = new Date(startdateInput.value);
+  console.log(datecheck);
+  
   renderCountry(newsubscription);
 
   // Perform further operations with the start date value
 });
-
-
-
 
 const renderCountry = function (output) {
   const classname = "neighbour";
@@ -80,12 +77,9 @@ const renderCountry = function (output) {
   rendered_divs.forEach((divs) =>
     divs.addEventListener("mouseout", function (e) {
       divs.classList.add("neighbour");
-
     })
   );
 };
-
-
 
 const CloseSubscription = function () {
   modal.classList.add("hidden");
@@ -97,7 +91,6 @@ const AddSubscription = function () {
   overlay.classList.remove("hidden");
   modal.classList.remove("hidden");
   window_to_blur.classList.add("blur");
-  
 };
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape" && !modal.classList.contains("hidden")) {
@@ -108,8 +101,7 @@ document.addEventListener("keydown", function (e) {
 modal_show.addEventListener("click", AddSubscription);
 close_subscription_button.addEventListener("click", CloseSubscription);
 overlay.addEventListener("click", CloseSubscription);
-submitButton.addEventListener('click',CloseSubscription);
-
+submitButton.addEventListener("click", CloseSubscription);
 
 var cardType; // Declare the cardType variable before using it
 
@@ -121,9 +113,4 @@ var cleave = new Cleave("#input-cc", {
   },
 });
 
-const TakeSubscriptionInfo = function(){
-  
-  // SubscriptionInfo.start= document.querySelector('startdate').value;
 
-
-}
