@@ -23,6 +23,7 @@ const notification_Model_Button = document.querySelector(".notification");
 const notification_Modal = document.querySelector("#notif");
 const notification_cross = document.querySelector("#notif--cross");
 const notif_overlay = document.querySelector("#notif--overlay");
+const notifications = document.querySelector("#notification--bar");
 let database = [];
 class SubscriptionInfo {
   constructor(start, next, Cardnum, type, name) {
@@ -44,7 +45,26 @@ const FetchingData = function () {
   }
 };
 
-const CheckForDates = function () {};
+const CheckForDates = function () {
+  const oneDay = 24 * 60 * 60 * 1000;
+  let difference;
+  let obj_date;
+  const today_date = new Date();
+  database.forEach((obj) => {
+    obj_date = new Date(`${obj.next}`);
+    const diffMilliseconds = Math.abs(today_date - obj_date);
+
+    // Calculate the number of days
+    const diffDays = Math.floor(diffMilliseconds / oneDay);
+
+    if (diffDays <= 5) {
+      notifications.insertAdjacentHTML(
+        "beforeend",
+        `<span> New Payment for ${obj.name} in ${diffDays} days! <span><br>`
+      );
+    }
+  });
+};
 submitButton.addEventListener("click", function () {
   const newsubscription = new SubscriptionInfo(
     startdateInput.value,
@@ -74,7 +94,7 @@ const renderCountry = function (output) {
       <h4 class="country__region"></h4>
       <p class="country__row"><span>💳</span>${output.type}</p>
       <p class="country__row"><span>🤝</span>${output.start}</p>
-      <p class="country__row"><span>💵</span>${output.next}</p>
+      <p class="country__row"><span>🔃</span>${output.next}</p>
     </div>
   </article>
 
@@ -106,7 +126,6 @@ function CloseSubscription(MODAL_TO_CLOSE) {
   overlay.classList.remove("blur");
 }
 function AddSubscription(MODAL_TO_OPEN) {
-  console.log(MODAL_TO_OPEN);
   overlay.classList.remove("hidden");
 
   MODAL_TO_OPEN.classList.remove("hidden");
