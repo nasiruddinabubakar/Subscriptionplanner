@@ -13,25 +13,20 @@ body {
   font-family: system-ui;
   color: #555;
   background-color: #f7f7f7;
-  /* min-height: 100vh; */
   background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-    /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
 }
 
 .container {
   display: flex;
   flex-flow: column;
   align-items: center;
-  /* min-height: 0vh; */
-
+  margin-top: 20px;
 }
 
 .countries {
-  /* margin-bottom: 8rem; */
   display: flex;
 
+  flex-wrap: wrap;
   font-size: 2rem;
   opacity: 0;
   transition: opacity 1s;
@@ -46,12 +41,10 @@ body {
   border-radius: 0.7rem;
   margin: 0 3rem;
   transition: 0.2s;
-  /* overflow: hidden; */
   color: white;
 }
 
 .neighbour::before {
-  /* content: 'Neighbour country'; */
   width: 100%;
   position: absolute;
   top: -4rem;
@@ -70,18 +63,18 @@ body {
 
 .country__img {
   height: 17rem;
-    object-fit: cover;
-    background-color: #eee;
-    border-top-left-radius: 0.7rem;
-    border-top-right-radius: 0.7rem;
-    padding: 3px 70px 3px 67px;
-    background-color: black;
-    backface-visibility: hidden;
+  object-fit: cover;
+  background-color: #eee;
+  border-top-left-radius: 0.7rem;
+  border-top-right-radius: 0.7rem;
+  padding: 3px 70px 3px 67px;
+  background-color: black;
+  backface-visibility: hidden;
 }
+
 .country__data {
   padding: 2.5rem 3.75rem 3rem 3.75rem;
   background-image: linear-gradient(to right, #141e30, #243b55);
-  
 }
 
 .country__name {
@@ -118,26 +111,26 @@ body {
 
 .images {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .images img {
   display: block;
-  width: 40rem;
+  width: 100%;
+  max-width: 40rem;
   margin: 2rem;
-}
-.navlist{
-  
-  color:white;
 }
 
 .images img.parallel {
-  width: 30rem;
+  width: 100%;
+  max-width: 30rem;
   margin: 2rem;
   border: 3rem solid white;
   box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
- box-shadow: 0 2rem 5rem 1rem rgba(0, 0, 0, 0.1);
 }
-.btnn{
+
+.btnn {
   padding: 0.8rem 2.5rem;
   border-radius: 3rem;
   background-color: var(--color-primary);
@@ -148,36 +141,29 @@ body {
   font-size: 1.7rem;
   font-weight: 500;
   color: #ddd;
- 
-  /* position: top; */
 }
-.btnn:hover{
 
-  background-image: linear-gradient(to right, #ff512f, #f09819);
+.btnn:hover {
+  background-image: linear-gradient(to right, #870000, #190a05);
   transition: 0.5s;
- 
 }
-.notification{
 
-  margin-left: 140vh;
- 
+.notification {
+  margin-left: 29px;
   background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-  text-shadow:0 0 white;
+  text-shadow: 0 0 white;
   color: transparent;
   font-style: normal;
   display: inline-flex;
-  vertical-align: middle;
-  font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-   font-size: 1.7em;
-  
-
-
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1.7em;
+  margin-top: 0px;
 }
-.notification:hover{
 
-  text-shadow:0 0 yellow;
-
+.notification:hover {
+  text-shadow: 0 0 yellow;
 }
+
 .modal {
   position: fixed;
   top: 50%;
@@ -208,6 +194,7 @@ body {
   margin-bottom: 4.5rem;
   line-height: 1.5;
   color: #ddd;
+  padding-left: 6.5%;
 }
 
 .modal__form {
@@ -215,7 +202,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 2fr;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .modal__form label {
@@ -253,11 +240,18 @@ body {
   visibility: hidden;
   opacity: 0;
 }
-.container.blur{
-  /* transition: 0.2s; */
+
+.container.blur {
   filter: blur(5px);
 }
-#butt{
 
-  margin-left: 22vh;
-}
+@media only screen and (max-width: 768px) {
+  .container {
+    /* margin-top: */
+  }}
+  span{
+
+    font-weight: 400;
+    font-size: 20px;
+    color: white;
+  }
