@@ -14,7 +14,7 @@
   <body>
     <header>
 
-      <button class="btnn">Add Subscription<box-icon name='right-arrow-alt' ></box-icon></button>
+      <button class="btnn">Add Subscription  &rarr;</button>
       <button class="notification">🔔</button>
   
     
@@ -34,26 +34,30 @@
         </article>
         -->
       </div>
-      <div class="modal hidden">
-        <button class="btn--close-modal">&times;</button>
-        <h2 class="modal__header">
-          Open your bank account <br />
-          in just <span class="highlight">5 minutes</span>
-        </h2>
-        <form class="modal__form">
-          <label>First Name</label>
-          <input type="text" />
-          <label>Last Name</label>
-          <input type="text" />
-          <label>Email Address</label>
-          <input type="email" />
-          <button class="btn">Next step &rarr;</button>
-        </form>
-      </div>
-      <div class="overlay hidden"></div>
       <!-- <input type="text" id="input-cc"> -->
+     
       <div class="images"></div>
     </main>
+    <div class="modal hidden">
+      <button class="btn--close-modal">&times;</button>
+      <h2 class="modal__header">
+               Subscriptions Made Easy! <br />
+           
+      </h2>
+      <form class="modal__form">
+        <label>Subscription</label>
+        <input type="website" id="service"/>
+        <label>Starting Date</label>
+        <input type="date" id="startdate" />
+        <label>Next Payment</label>
+        <input type="date" id="enddate"/>
+        <label>Card Number</label>
+        <input type="text" id="input-cc"/>
+    
+      </form>
+      <button  id = "butt" class="btnn">Done</button>
+    </div>
+    <div class="overlay hidden"></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.5.8/cleave.min.js"></script>
   </body>
 </html>
