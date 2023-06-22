@@ -76,7 +76,7 @@ submitButton.addEventListener("click", function () {
 
   database.push(newsubscription);
   localStorage.setItem("user", `${JSON.stringify(database)}`);
-  renderCountry(newsubscription);
+  location.reload();
 
   // Perform further operations with the start date value
 });
